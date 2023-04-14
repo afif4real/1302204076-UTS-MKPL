@@ -21,32 +21,23 @@ public class TaxFunction {
 	private static final int ANNUAL_TAX_FREE_INCOME_PER_CHILD = 1500000;
 
 	//memasukan angka-angka kedalam variabel agar mudah dibaca dan di maintain (bad smell 1)
-	
-	
-//	public static int calculateTax(int monthlySalary, int otherMonthlyIncome, int numberOfMonthWorking, int deductible, boolean isMarried, int numberOfChildren) {
-//
-//		int tax = 0;
-//
-//		if (numberOfMonthWorking > 12) {
-//			System.err.println("More than 12 month working per year");
-//		}
-//
-//		if (numberOfChildren > 3) {
-//			numberOfChildren = 3;
-//		}
-//
-//		if (isMarried) {
-//			tax = (int) Math.round(0.05 * (((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible - (54000000 + 4500000 + (numberOfChildren * 1500000))));
-//		}else {
-//			tax = (int) Math.round(0.05 * (((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible - 54000000));
-//		}
-//
-//		if (tax < 0) {
-//			return 0;
-//		}else {
-//			return tax;
-//		}
-//
-//	}
+
+	//memisahkan fungsi yang berada pada function calculateTax menjadi beberapa function agar
+	//code mudah dibaca dan di maintain (bad smell 2)
+
+	public static int calculateTax(int monthlySalary, int otherMonthlyIncome, int numberOfMonthsWorked, int deductible, boolean isMarried, int numberOfChildren) {
+		int annualTaxFreeIncome = calculateAnnualTaxFreeIncome(isMarried, numberOfChildren);
+		int annualTaxableIncome = calculateAnnualTaxableIncome(monthlySalary, otherMonthlyIncome, numberOfMonthsWorked, deductible, annualTaxFreeIncome);
+
+	}
+
+	private static int calculateAnnualTaxFreeIncome() {
+
+	}
+
+	private static int calculateAnnualTaxableIncome() {
+
+	}
+
 	
 }
