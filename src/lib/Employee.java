@@ -28,19 +28,17 @@ public class Employee {
 
 	private List<String> childNames;
 	private List<String> childIdNumbers;
-	
-	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, boolean gender) {
+
+	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, LocalDate joinDate, boolean isForeigner, boolean isMale) {
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.idNumber = idNumber;
 		this.address = address;
-		this.yearJoined = yearJoined;
-		this.monthJoined = monthJoined;
-		this.dayJoined = dayJoined;
+		this.joinDate = joinDate;
 		this.isForeigner = isForeigner;
-		this.gender = gender;
-		
+		this.isMale = isMale;
+
 		childNames = new LinkedList<String>();
 		childIdNumbers = new LinkedList<String>();
 	}
@@ -50,22 +48,23 @@ public class Employee {
 	 * Jika pegawai adalah warga negara asing gaji bulanan diperbesar sebanyak 50%
 	 */
 	
-	public void setMonthlySalary(int grade) {	
-		if (grade == 1) {
-			monthlySalary = 3000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}else if (grade == 2) {
-			monthlySalary = 5000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}else if (grade == 3) {
-			monthlySalary = 7000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
+	public void setMonthlySalary(int grade) {
+		switch (grade) {
+			case 1:
+				monthlySalary = 3000000;
+				break;
+			case 2:
+				monthlySalary = 5000000;
+				break;
+			case 3:
+				monthlySalary = 7000000;
+				break;
+			default:
+				throw new IllegalArgumentException("Invalid grade value");
+		}
+
+		if (isForeigner) {
+			monthlySalary *= 1.5;
 		}
 	}
 	
