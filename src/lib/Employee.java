@@ -12,12 +12,10 @@ public class Employee {
 	private String lastName;
 	private String idNumber;
 	private String address;
-	
-	private int yearJoined;
-	private int monthJoined;
-	private int dayJoined;
-	private int monthWorkingInYear;
-	
+
+	private LocalDate joinDate;
+
+
 	private boolean isForeigner;
 	private boolean gender; //true = Laki-laki, false = Perempuan
 	
