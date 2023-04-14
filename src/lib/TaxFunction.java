@@ -28,7 +28,8 @@ public class TaxFunction {
 	public static int calculateTax(int monthlySalary, int otherMonthlyIncome, int numberOfMonthsWorked, int deductible, boolean isMarried, int numberOfChildren) {
 		int annualTaxFreeIncome = calculateAnnualTaxFreeIncome(isMarried, numberOfChildren);
 		int annualTaxableIncome = calculateAnnualTaxableIncome(monthlySalary, otherMonthlyIncome, numberOfMonthsWorked, deductible, annualTaxFreeIncome);
-
+		int annualTax = (int) Math.round(annualTaxableIncome * (TAX_RATE_PERCENT / 100.0));
+		return Math.max(annualTax, 0);
 	}
 
 	private static int calculateAnnualTaxFreeIncome() {
