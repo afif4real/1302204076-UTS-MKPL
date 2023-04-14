@@ -20,10 +20,6 @@ public class TaxFunction {
 	private static final int ANNUAL_TAX_FREE_INCOME_MARRIED = ANNUAL_TAX_FREE_INCOME_SINGLE + 4500000;
 	private static final int ANNUAL_TAX_FREE_INCOME_PER_CHILD = 1500000;
 
-	//memasukan angka-angka kedalam variabel agar mudah dibaca dan di maintain (bad smell 1)
-
-	//memisahkan fungsi yang berada pada function calculateTax menjadi beberapa function agar
-	//code mudah dibaca dan di maintain (bad smell 2)
 
 	public static int calculateTax(int monthlySalary, int otherMonthlyIncome, int numberOfMonthsWorked, int deductible, boolean isMarried, int numberOfChildren) {
 		int annualTaxFreeIncome = calculateAnnualTaxFreeIncome(isMarried, numberOfChildren);
@@ -32,12 +28,16 @@ public class TaxFunction {
 		return Math.max(annualTax, 0);
 	}
 
-	private static int calculateAnnualTaxFreeIncome() {
-
+	private static int calculateAnnualTaxFreeIncome(boolean isMarried, int numberOfChildren) {
+		int annualTaxFreeIncome = isMarried ? ANNUAL_TAX_FREE_INCOME_MARRIED : ANNUAL_TAX_FREE_INCOME_SINGLE;
+		annualTaxFreeIncome += Math.min(numberOfChildren, MAX_CHILDREN) * ANNUAL_TAX_FREE_INCOME_PER_CHILD;
+		return annualTaxFreeIncome;
 	}
 
-	private static int calculateAnnualTaxableIncome() {
-
+	private static int calculateAnnualTaxableIncome(int monthlySalary, int otherMonthlyIncome, int numberOfMonthsWorked, int deductible, int annualTaxFreeIncome) {
+		int annualSalary = (monthlySalary + otherMonthlyIncome) * numberOfMonthsWorked;
+		int annualTaxableIncome = annualSalary - deductible - annualTaxFreeIncome;
+		return Math.max(annualTaxableIncome, 0);
 	}
 
 	
